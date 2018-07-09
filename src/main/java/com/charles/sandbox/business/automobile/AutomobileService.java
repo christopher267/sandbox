@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Component;
+
 import com.charles.sandbox.business.api.automobile.IAutomobileService;
 import com.charles.sandbox.business.api.part.IPartService;
 import com.charles.sandbox.business.dataobject.part.EnginePartDTO;
@@ -14,6 +16,7 @@ import com.charles.sandbox.business.exception.ServiceException;
 import com.charles.sandbox.persist.api.automobile.IAutomobileDelegate;
 import com.charles.sandbox.web.dataobject.v1.AutomobileDTO;
 
+@Component
 public class AutomobileService implements IAutomobileService {
 	
 	@Resource
@@ -29,11 +32,11 @@ public class AutomobileService implements IAutomobileService {
 	public AutomobileDTO createAutomobile(AutomobileDTO automobileDTO) throws ServiceException {
 		
 		try {
-			automobileDTO = automobileDelegate.createAutomobile(automobileDTO);
+			automobileDelegate.create(automobileDTO);
 			
-			enginePartService.createParts(automobileDTO.getEngineParts());
+			enginePartService.create(automobileDTO.getEngineParts());
 			
-			interiorPartService.createParts(automobileDTO.getInteriorParts());
+			interiorPartService.create(automobileDTO.getInteriorParts());
 			
 		} catch (ServiceException e) {
 			// TODO: Add logging
@@ -45,20 +48,21 @@ public class AutomobileService implements IAutomobileService {
 
 	@Override
 	public AutomobileDTO updateAutomobile(AutomobileDTO automobileDTO) throws ServiceException {
-		return automobileDelegate.updateAutomobile(automobileDTO);
+		automobileDelegate.update(automobileDTO);
+		return automobileDTO;
 	}
 
 	@Override
 	public void deleteAutomobile(Long id) throws ServiceException {
-		automobileDelegate.deleteAutomobile(id);
+		automobileDelegate.delete(id);
 	}
 
 	@Override
 	public AutomobileDTO getAutomobile(String manufacturer, String model, Long year, Boolean orderableParts) throws ServiceException {
-		AutomobileDTO automobileDTO = automobileDelegate.getAutomobile(manufacturer, model, year);
+		AutomobileDTO automobileDTO = automobileDelegate.get(manufacturer, model, year);
 		
-		automobileDTO.setEngineParts(enginePartService.getParts(automobileDTO.getId(), orderableParts));
-		automobileDTO.setInteriorParts(interiorPartService.getParts(automobileDTO.getId(), orderableParts));
+		automobileDTO.setEngineParts(enginePartService.get(automobileDTO.getId(), orderableParts));
+		automobileDTO.setInteriorParts(interiorPartService.get(automobileDTO.getId(), orderableParts));
 		
 		return automobileDTO;
 	}
@@ -66,12 +70,12 @@ public class AutomobileService implements IAutomobileService {
 	@Override
 	public List<AutomobileDTO> findByPart(String partName) throws ServiceException {
 		
-		List<EnginePartDTO> parts = enginePartService.getParts(partName);
+		List<EnginePartDTO> parts = enginePartService.get(partName);
 		
 		List<Long> automobileIds = new ArrayList<>();
 		automobileIds = parts.stream().map(EnginePartDTO::getId).collect(Collectors.toList());
 		
-		List<AutomobileDTO> automobileList = automobileDelegate.getAutomobiles(automobileIds);
+		List<AutomobileDTO> automobileList = automobileDelegate.get(automobileIds);
 		
 		return automobileList;
 	}

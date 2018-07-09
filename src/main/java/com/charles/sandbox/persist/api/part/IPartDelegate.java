@@ -6,16 +6,16 @@ import com.charles.sandbox.business.dataobject.part.PartDTO;
 
 public interface IPartDelegate<T extends PartDTO> {
 	
-	public T createPart(T partDTO);
+	public T create(T partDTO);
 	
-	public T updatePart(T partDTO);
+	public T update(T partDTO);
 	
-	public void deletePart(Long id);
+	public void delete(Long id);
 	
-	public List<T> readParts(Long automobileId);
+	public List<T> getByAutomobileId(Long automobileId);
 	
-	public T readPart(Long id);
+	public T get(Long id);
 	
-	public List<T> readParts(String name);
+	public List<T> get(String name);
 
 }

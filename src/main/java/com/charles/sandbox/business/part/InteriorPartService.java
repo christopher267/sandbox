@@ -11,10 +11,8 @@ import org.springframework.util.CollectionUtils;
 
 import com.charles.sandbox.business.api.part.IPartService;
 import com.charles.sandbox.business.dataobject.part.InteriorPartDTO;
-import com.charles.sandbox.business.dataobject.part.PartDetailDTO;
 import com.charles.sandbox.business.exception.ServiceException;
 import com.charles.sandbox.persist.api.part.IPartDelegate;
-import com.charles.sandbox.persist.api.part.IPartDetailDelegate;
 import com.charles.sandbox.remote.api.dataobject.OrderablePartDTO;
 import com.charles.sandbox.remote.api.exception.RemotingException;
 
@@ -25,19 +23,16 @@ public class InteriorPartService extends PartService implements IPartService<Int
 	IPartDelegate<InteriorPartDTO> partDelegate;
 	
 	@Resource
-	IPartDetailDelegate<PartDetailDTO> partDetailDelegate;
-	
-	@Resource
 	PartPredicate<InteriorPartDTO> partPredicate;
 	
 	@Override
-	public InteriorPartDTO createPart(InteriorPartDTO partDTO) throws ServiceException {
-		return partDelegate.createPart(partDTO);
+	public InteriorPartDTO create(InteriorPartDTO partDTO) throws ServiceException {
+		return partDelegate.create(partDTO);
 	}
 	
 	@Override
-	public List<InteriorPartDTO> getParts(Long automobileId, Boolean orderable) throws ServiceException {
-		List<InteriorPartDTO> interiorParts = partDelegate.readParts(automobileId);
+	public List<InteriorPartDTO> get(Long automobileId, Boolean orderable) throws ServiceException {
+		List<InteriorPartDTO> interiorParts = partDelegate.getByAutomobileId(automobileId);
 		
 		if(orderable) {
 			getOrderableParts(interiorParts);
@@ -47,36 +42,36 @@ public class InteriorPartService extends PartService implements IPartService<Int
 	}
 
 	@Override
-	public InteriorPartDTO updatePart(InteriorPartDTO partDTO) throws ServiceException {
-		return partDelegate.updatePart(partDTO);
+	public InteriorPartDTO update(InteriorPartDTO partDTO) throws ServiceException {
+		return partDelegate.update(partDTO);
 	}
 
 	@Override
-	public void deletePart(Long id) throws ServiceException {
-		partDelegate.deletePart(id);
+	public void delete(Long id) throws ServiceException {
+		partDelegate.delete(id);
 	}
 
 	@Override
-	public InteriorPartDTO getPart(Long id) throws ServiceException {
-		return partDelegate.readPart(id);
+	public InteriorPartDTO get(Long id) throws ServiceException {
+		return partDelegate.get(id);
 	}
 
 	@Override
-	public List<InteriorPartDTO> createParts(List<InteriorPartDTO> parts) throws ServiceException {
+	public List<InteriorPartDTO> create(List<InteriorPartDTO> parts) throws ServiceException {
 		
 		if(CollectionUtils.isEmpty(parts)) return null;
 		
 		List<InteriorPartDTO> createdParts = new ArrayList<>();
 		
 		parts.stream().forEach(enginePart -> 
-			createdParts.add(partDelegate.createPart(enginePart)));
+			createdParts.add(partDelegate.create(enginePart)));
 		
 		return createdParts;
 	}
 
 	@Override
-	public List<InteriorPartDTO> getParts(String name) throws ServiceException {
-		return partDelegate.readParts(name);
+	public List<InteriorPartDTO> get(String name) throws ServiceException {
+		return partDelegate.get(name);
 	}
 	
 	//TODO: This is the same code in EngineParts, consolidate this functionality to base PartService -CTC

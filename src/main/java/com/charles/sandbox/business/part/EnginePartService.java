@@ -11,10 +11,8 @@ import org.springframework.util.CollectionUtils;
 
 import com.charles.sandbox.business.api.part.IPartService;
 import com.charles.sandbox.business.dataobject.part.EnginePartDTO;
-import com.charles.sandbox.business.dataobject.part.PartDetailDTO;
 import com.charles.sandbox.business.exception.ServiceException;
 import com.charles.sandbox.persist.api.part.IPartDelegate;
-import com.charles.sandbox.persist.api.part.IPartDetailDelegate;
 import com.charles.sandbox.remote.api.dataobject.OrderablePartDTO;
 import com.charles.sandbox.remote.api.exception.RemotingException;
 
@@ -25,29 +23,26 @@ public class EnginePartService extends PartService implements IPartService<Engin
 	IPartDelegate<EnginePartDTO> partDelegate;
 	
 	@Resource
-	IPartDetailDelegate<PartDetailDTO> partDetailDelegate;
-	
-	@Resource
 	PartPredicate<EnginePartDTO> partPredicate;
 	
 	@Override
-	public EnginePartDTO createPart(EnginePartDTO partDTO) throws ServiceException {
-		return partDelegate.createPart(partDTO);
+	public EnginePartDTO create(EnginePartDTO partDTO) throws ServiceException {
+		return partDelegate.create(partDTO);
 	}
 
 	@Override
-	public EnginePartDTO updatePart(EnginePartDTO partDTO) throws ServiceException {
-		return partDelegate.updatePart(partDTO);
+	public EnginePartDTO update(EnginePartDTO partDTO) throws ServiceException {
+		return partDelegate.update(partDTO);
 	}
 
 	@Override
-	public void deletePart(Long id) throws ServiceException {
-		partDelegate.deletePart(id);
+	public void delete(Long id) throws ServiceException {
+		partDelegate.delete(id);
 	}
 
 	@Override
-	public List<EnginePartDTO> getParts(Long automobileId, Boolean orderable) throws ServiceException {
-		List<EnginePartDTO> engineParts = partDelegate.readParts(automobileId);
+	public List<EnginePartDTO> get(Long automobileId, Boolean orderable) throws ServiceException {
+		List<EnginePartDTO> engineParts = partDelegate.getByAutomobileId(automobileId);
 		
 		if(orderable) {
 			getOrderableParts(engineParts);
@@ -57,14 +52,14 @@ public class EnginePartService extends PartService implements IPartService<Engin
 	}
 
 	@Override
-	public List<EnginePartDTO> createParts(List<EnginePartDTO> parts) throws ServiceException {
+	public List<EnginePartDTO> create(List<EnginePartDTO> parts) throws ServiceException {
 		
 		if(CollectionUtils.isEmpty(parts)) return null;
 		
 		List<EnginePartDTO> createdParts = new ArrayList<>();
 		
 		parts.stream().forEach(enginePart -> 
-			createdParts.add(partDelegate.createPart(enginePart)));
+			createdParts.add(partDelegate.create(enginePart)));
 		
 		return createdParts;
 	}
@@ -86,13 +81,13 @@ public class EnginePartService extends PartService implements IPartService<Engin
 	}
 
 	@Override
-	public List<EnginePartDTO> getParts(String name) throws ServiceException {
-		return partDelegate.readParts(name);
+	public List<EnginePartDTO> get(String name) throws ServiceException {
+		return partDelegate.get(name);
 	}
 
 	@Override
-	public EnginePartDTO getPart(Long id) throws ServiceException {
-		return partDelegate.readPart(id);
+	public EnginePartDTO get(Long id) throws ServiceException {
+		return partDelegate.get(id);
 	}
 	
 }

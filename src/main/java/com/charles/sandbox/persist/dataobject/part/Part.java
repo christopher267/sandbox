@@ -1,14 +1,20 @@
-package com.charles.sandbox.business.dataobject.part;
+package com.charles.sandbox.persist.dataobject.part;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Id;
 
-public abstract class PartDTO implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
+public abstract class Part {
+
+	@Id
 	private Long id;
+	
+	@Column
 	private Long automobileId;
+	
+	@Column
 	private Boolean orderable;
+	
+	@Column
 	private String partName;
 
 	public Long getId() {

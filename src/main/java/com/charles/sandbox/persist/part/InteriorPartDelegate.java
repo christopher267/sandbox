@@ -2,29 +2,21 @@ package com.charles.sandbox.persist.part;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.charles.sandbox.business.dataobject.part.EnginePartDTO;
 import com.charles.sandbox.persist.api.part.IPartDelegate;
 
-@Repository
-public class EnginePartDelegate implements IPartDelegate<EnginePartDTO> {
+public class InteriorPartDelegate implements IPartDelegate<EnginePartDTO> {
 	
-	//TODO: Add engine part DAO
-	
-	@Override
-	public EnginePartDTO create(EnginePartDTO partDTO) {
-		return partDTO;
-	}
+	//TODO: Add interior part DAO
 
 	@Override
-	public EnginePartDTO update(EnginePartDTO partDTO) {
+	public EnginePartDTO create(EnginePartDTO partDTO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EnginePartDTO get(Long id) {
+	public EnginePartDTO update(EnginePartDTO partDTO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,14 +28,21 @@ public class EnginePartDelegate implements IPartDelegate<EnginePartDTO> {
 	}
 
 	@Override
-	public List<EnginePartDTO> get(String name) {
+	public List<EnginePartDTO> getByAutomobileId(Long automobileId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EnginePartDTO> getByAutomobileId(Long automobileId) {
+	public EnginePartDTO get(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<EnginePartDTO> get(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -2,13 +2,13 @@ package com.charles.sandbox.persist.api.automobile;
 
 import java.util.List;
 
-import com.charles.sandbox.web.dataobject.v1.AutomobileDTO;
+import com.charles.sandbox.persist.dataobject.automobile.Automobile;
 
-public interface IAutomobileDelegate<T extends AutomobileDTO> {
+public interface IAutomobileDAO<T extends Automobile> {
 	
-	public void create(T automobileDTO);
+	public void create(T automobile);
 	
-	public void update(T automobileDTO);
+	public void update(T automobile);
 	
 	public void delete(Long id);
 	
@@ -17,5 +17,5 @@ public interface IAutomobileDelegate<T extends AutomobileDTO> {
 	public T get(Long id);
 	
 	public List<T> get(List<Long> ids);
-
+	
 }
