@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
-import com.charles.sandbox.api.part.IPartSerice;
 import com.charles.sandbox.business.api.automobile.IAutomobileService;
+import com.charles.sandbox.business.api.part.IPartService;
 import com.charles.sandbox.business.dataobject.part.EnginePartDTO;
 import com.charles.sandbox.business.dataobject.part.InteriorPartDTO;
 import com.charles.sandbox.business.exception.ServiceException;
@@ -20,10 +20,10 @@ public class AutomobileService implements IAutomobileService {
 	IAutomobileDelegate<AutomobileDTO> automobileDelegate;
 	
 	@Resource
-	IPartSerice<EnginePartDTO> enginePartService;
+	IPartService<EnginePartDTO> enginePartService;
 	
 	@Resource
-	IPartSerice<InteriorPartDTO> interiorPartService;
+	IPartService<InteriorPartDTO> interiorPartService;
 	
 	@Override
 	public AutomobileDTO createAutomobile(AutomobileDTO automobileDTO) throws ServiceException {

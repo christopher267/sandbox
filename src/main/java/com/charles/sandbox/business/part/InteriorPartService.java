@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.charles.sandbox.api.part.IPartSerice;
+import com.charles.sandbox.business.api.part.IPartService;
 import com.charles.sandbox.business.dataobject.part.InteriorPartDTO;
 import com.charles.sandbox.business.dataobject.part.PartDetailDTO;
 import com.charles.sandbox.business.exception.ServiceException;
@@ -19,7 +19,7 @@ import com.charles.sandbox.remote.api.dataobject.OrderablePartDTO;
 import com.charles.sandbox.remote.api.exception.RemotingException;
 
 @Component
-public class InteriorPartService extends PartService implements IPartSerice<InteriorPartDTO> {
+public class InteriorPartService extends PartService implements IPartService<InteriorPartDTO> {
 
 	@Resource
 	IPartDelegate<InteriorPartDTO> partDelegate;

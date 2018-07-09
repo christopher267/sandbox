@@ -1,11 +1,11 @@
-package com.charles.sandbox.api.part;
+package com.charles.sandbox.business.api.part;
 
 import java.util.List;
 
 import com.charles.sandbox.business.dataobject.part.PartDTO;
 import com.charles.sandbox.business.exception.ServiceException;
 
-public interface IPartSerice<T extends PartDTO> {
+public interface IPartService<T extends PartDTO> {
 	
 	public T createPart(T part) throws ServiceException;
 	
