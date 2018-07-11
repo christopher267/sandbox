@@ -2,9 +2,12 @@ package com.charles.sandbox.persist.part;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.charles.sandbox.business.dataobject.part.EnginePartDTO;
 import com.charles.sandbox.persist.api.part.IPartDelegate;
 
+@Component(value="interiorPartDelegate")
 public class InteriorPartDelegate implements IPartDelegate<EnginePartDTO> {
 	
 	//TODO: Add interior part DAO

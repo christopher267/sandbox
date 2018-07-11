@@ -11,22 +11,22 @@ public class AutomobileDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private String name;
-	private String year;
+	private String manufacturer;
+	private Long year;
 	private String model;
 	private List<EnginePartDTO> engineParts;
 	private List<InteriorPartDTO> interiorParts;
 
-	public String getName() {
-		return name;
+	public String getManufacturer() {
+		return manufacturer;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
-	public String getYear() {
+	public Long getYear() {
 		return year;
 	}
-	public void setYear(String year) {
+	public void setYear(Long year) {
 		this.year = year;
 	}
 	public String getModel() {

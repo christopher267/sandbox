@@ -58,7 +58,7 @@ public interface IPartService<T extends PartDTO> {
 	 * @return
 	 * @throws ServiceException
 	 */
-	public List<T> get(Long automobileId, Boolean orderable) throws ServiceException;
+	public List<T> get(Long automobileId, boolean orderable) throws ServiceException;
 	
 	/**
 	 * Returns a List of Parts based on part name.

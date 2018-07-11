@@ -18,7 +18,10 @@ public class AutomobileMapperUtil {
 	 * @return
 	 */
 	public Automobile map(Automobile automobile, AutomobileDTO automobileDTO) {
-		//TODO: implement mapping
+		automobile.setId(automobileDTO.getId());
+		automobile.setModel(automobileDTO.getModel());
+		automobile.setManufacturer(automobileDTO.getManufacturer());
+		automobile.setYear(automobileDTO.getYear());
 		return automobile;
 	}
 	
@@ -29,7 +32,10 @@ public class AutomobileMapperUtil {
 	 * @return
 	 */
 	public AutomobileDTO mapReverse(Automobile automobile, AutomobileDTO automobileDTO) {
-		//TODO: implement mapping
+		automobileDTO.setId(automobile.getId());
+		automobileDTO.setModel(automobile.getModel());
+		automobileDTO.setManufacturer(automobile.getManufacturer());
+		automobileDTO.setYear(automobile.getYear());
 		return automobileDTO;
 	}
 	

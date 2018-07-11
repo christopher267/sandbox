@@ -61,9 +61,6 @@ public class AutomobileService implements IAutomobileService {
 	public AutomobileDTO getAutomobile(String manufacturer, String model, Long year, Boolean orderableParts) throws ServiceException {
 		AutomobileDTO automobileDTO = automobileDelegate.get(manufacturer, model, year);
 		
-		automobileDTO.setEngineParts(enginePartService.get(automobileDTO.getId(), orderableParts));
-		automobileDTO.setInteriorParts(interiorPartService.get(automobileDTO.getId(), orderableParts));
-		
 		return automobileDTO;
 	}
 

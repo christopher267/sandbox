@@ -16,33 +16,33 @@ import com.charles.sandbox.persist.api.part.IPartDelegate;
 import com.charles.sandbox.remote.api.dataobject.OrderablePartDTO;
 import com.charles.sandbox.remote.api.exception.RemotingException;
 
-@Component
+@Component(value="enginePartService")
 public class EnginePartService extends PartService implements IPartService<EnginePartDTO> {
 
 	@Resource
-	IPartDelegate<EnginePartDTO> partDelegate;
+	IPartDelegate<EnginePartDTO> enginePartDelegate;
 	
 	@Resource
 	PartPredicate<EnginePartDTO> partPredicate;
 	
 	@Override
 	public EnginePartDTO create(EnginePartDTO partDTO) throws ServiceException {
-		return partDelegate.create(partDTO);
+		return enginePartDelegate.create(partDTO);
 	}
 
 	@Override
 	public EnginePartDTO update(EnginePartDTO partDTO) throws ServiceException {
-		return partDelegate.update(partDTO);
+		return enginePartDelegate.update(partDTO);
 	}
 
 	@Override
 	public void delete(Long id) throws ServiceException {
-		partDelegate.delete(id);
+		enginePartDelegate.delete(id);
 	}
 
 	@Override
-	public List<EnginePartDTO> get(Long automobileId, Boolean orderable) throws ServiceException {
-		List<EnginePartDTO> engineParts = partDelegate.getByAutomobileId(automobileId);
+	public List<EnginePartDTO> get(Long automobileId, boolean orderable) throws ServiceException {
+		List<EnginePartDTO> engineParts = enginePartDelegate.getByAutomobileId(automobileId);
 		
 		if(orderable) {
 			getOrderableParts(engineParts);
@@ -59,7 +59,7 @@ public class EnginePartService extends PartService implements IPartService<Engin
 		List<EnginePartDTO> createdParts = new ArrayList<>();
 		
 		parts.stream().forEach(enginePart -> 
-			createdParts.add(partDelegate.create(enginePart)));
+			createdParts.add(enginePartDelegate.create(enginePart)));
 		
 		return createdParts;
 	}
@@ -82,12 +82,12 @@ public class EnginePartService extends PartService implements IPartService<Engin
 
 	@Override
 	public List<EnginePartDTO> get(String name) throws ServiceException {
-		return partDelegate.get(name);
+		return enginePartDelegate.get(name);
 	}
 
 	@Override
 	public EnginePartDTO get(Long id) throws ServiceException {
-		return partDelegate.get(id);
+		return enginePartDelegate.get(id);
 	}
 	
 }
